@@ -56,7 +56,7 @@ for i = 1:length(Task3_theta_list)
     if i == 1
         pause(1)
     end
-    pause(0.01);
+    pause(0.005);
 end
 
 % 

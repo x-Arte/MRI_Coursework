@@ -57,27 +57,27 @@ for i = 1:length(Task3_theta_list)
     end
     pause(0.2);
 end
+pause(5);
 %% Task 4
 disp('Task 4');
 myObj.go_to_zero(s); %return back to initial position
 pause(2);
 %init
-%
-myObj.go_to_axis(s,90, 20, -3.7, 0,  -43.7, 0);
+%89.9, 54.7, -12.4, 0, -35.3, 0
+myObj.go_to_axis(s,90, 30, -24, 0, -31, 0);
 pause(2);
-% 0, 250, 55
-myObj.go_to_axis(s,90, 56.9, -13.2, 0, -43.7, 0);
+myObj.go_to_axis(s,90, 65, -24, 0, -31, 0);
 pause(2);
 myObj.air_pump_on(s);
 pause(2);
 %inter
-% 
-myObj.go_to_axis(s,90, 29.7, -34.4, 0, 0, 0);
+%89.9, 29.7, -34.4, 0, 0, 0
+myObj.go_to_axis(s,90, 40, -35.5, 0, -50, 0);
 pause(2);
 
 %final
-%0, 300, 55
-myObj.go_to_axis(s,90, 69.0, -35.5, 0, -48, 0);
+%90.1, 69.0, -35.5, 0, -53.8, 0
+myObj.go_to_axis(s,90, 68, -35.5, 0, -50, 0);
 pause(2);
 %
 myObj.air_pump_off(s);

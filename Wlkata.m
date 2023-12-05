@@ -63,10 +63,10 @@ myObj.go_to_zero(s); %return back to initial position
 pause(2);
 %init
 %
-myObj.go_to_axis(s,90, 50, -20, 0, -36.7, 0);
+myObj.go_to_axis(s,90, 20, -3.7, 0,  -43.7, 0);
 pause(2);
 % 0, 250, 55
-myObj.go_to_axis(s,90, 56.9, -13.2, 0, -36.7, 0);
+myObj.go_to_axis(s,90, 56.9, -13.2, 0, -43.7, 0);
 pause(2);
 myObj.air_pump_on(s);
 pause(2);

@@ -1,4 +1,4 @@
-function task4_coppelia()
+function task1_coppelia()
 % This function can build the connection to CoppeliaSim and control the
 % robot on its joint space
 % This script should only be used for tutorial sessions of Medical Robotics and Instrumentation
@@ -34,44 +34,45 @@ h = tutorial_mirobot_control_init(vrep, id);
 pause(.2);
 
 %%% Calculating the joint motion path in joint space
-load("Task4_theta_list.mat");
-pos = [];
-pump_on_step = 2;
-pump_off_step = 5;
+dt = 0.05; % Time of each simulation step
+executing_time = 2; % Total executing time of this motion in Seconds
 
+% the initial position
+% -pi/2 pi/6 -pi/6 -pi/4 0 0 
+joint_pos_init = [0, 0, 0, 0, 0, 0];
+joint_pos_init = transform_angle(joint_pos_init);
+% Intermediate Pose
+% -pi/4, pi/12, pi/12, pi/6, pi/6, pi/6
+joint_pos_final = [-pi/4, pi/12, pi/12, pi/6, pi/6, pi/6];
+joint_pos_final = transform_angle(joint_pos_final);
+% Interpolation from staring to end joint position with given running steps
+t_step = 0:dt:executing_time; % Interpolated time axis
 
-for i = 1:length(Task4_theta_list)
-    this_pos = Task4_theta_list(:,i)';
-    this_pos = transform_angle(this_pos);
-    pos = [pos;this_pos];    
-end
-for j = 2:length(Task4_theta_list)
-    dt = 0.05; % Time of each simulation step
-    executing_time = 1;
-    t_step  = 0:dt:executing_time;
-    step_pos = interp1([0, executing_time],[pos(j-1,:);pos(j,:)],t_step); % Linear interpolation
-    disp('Jogging the robot by directly setting joint position');
-    for steps = 1:length(t_step)
+% Create an array to store robot tip position
+tip_positions = zeros(length(t_step),3);
+
+step_pos = interp1([0, executing_time],[joint_pos_init; joint_pos_final],t_step); % Linear interpolation
+%%% Set robot joint position in simulation
+disp('Jogging the robot by directly setting joint position');
+for steps = 1:length(t_step)
     % The communication pause allows all commands to be sent simultaneously
-        vrep.simxPauseCommunication(id, 1);  % Pause the signal sending
-        for i = 1:1:6
-            res = vrep.simxSetJointPosition(id, h.Joints(i), step_pos(steps,i), vrep.simx_opmode_oneshot); % Set joint position
-            vrchk(vrep, res, true);
-        end
-        vrep.simxPauseCommunication(id, 0);  % Continue signal sending
-        pause(dt);  % Allow time for the simulator to run
+    vrep.simxPauseCommunication(id, 1);  % Pause the signal sending
+    for i = 1:1:6
+        res = vrep.simxSetJointPosition(id, h.Joints(i), step_pos(steps,i), vrep.simx_opmode_oneshot); % Set joint position
+        vrchk(vrep, res, true);
+    end
+    vrep.simxPauseCommunication(id, 0);  % Continue signal sending
+
+    pause(dt);  % Allow time for the simulator to run
     
     [res, position] = vrep.simxGetObjectPosition(id, h.Tip, h.Base,vrep.simx_opmode_oneshot); vrchk(vrep, res, true);
-    end
-    if(j == pump_on_step) || (j == pump_off_step)
-        pause(1);
-    end
+    tip_positions(steps,:) = position;
 end
-%%% Set robot joint position in simulation
 disp("End jogging");
 
 % Pause for 5s
 pause(2);   
+
 end
 %% 
 function handles = tutorial_mirobot_control_init(vrep, id)

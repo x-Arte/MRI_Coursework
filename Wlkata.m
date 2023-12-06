@@ -60,28 +60,28 @@ end
 pause(5);
 %% Task 4
 disp('Task 4');
-myObj.go_to_zero(s); %return back to initial position
-pause(2);
+myObj.home(s);
+pause(1);
 %init
-%89.9, 54.7, -12.4, 0, -35.3, 0
-myObj.go_to_axis(s,90, 30, -24, 0, -31, 0);
-pause(2);
-myObj.go_to_axis(s,90, 65, -24, 0, -31, 0);
-pause(2);
+myObj.go_to_axis(s,90, 53, -10, 0, -46.7, 0);
+pause(1);
+myObj.go_to_axis(s,90, 58, -10, 0, -46.7, 0);
+pause(1);
 myObj.air_pump_on(s);
-pause(2);
+pause(1);
 %inter
-%89.9, 29.7, -34.4, 0, 0, 0
-myObj.go_to_axis(s,90, 40, -35.5, 0, -50, 0);
-pause(2);
-
+myObj.go_to_axis(s,90, 50, -10, 0, -46.7, 0);
+pause(1);
 %final
-%90.1, 69.0, -35.5, 0, -53.8, 0
-myObj.go_to_axis(s,90, 68, -35.5, 0, -50, 0);
-pause(2);
-%
+myObj.go_to_axis(s,90, 70, -35, 0, -51.7, 0);
+pause(1);
+myObj.go_to_axis(s,90, 70, -32, 0, -58.7, 0);
+pause(1);
 myObj.air_pump_off(s);
-
+pause(1);
+myObj.go_to_axis(s,90, 65, -32, 0, -58.7, 0);
+myObj.home(s);
+pause(2);
 %% 
 myObj.go_to_zero(s);
 pause(5);

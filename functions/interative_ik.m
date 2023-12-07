@@ -9,18 +9,6 @@ function  [theta_result,Q_k_1] = interative_ik(init_joint,target_position,transf
     theta_k_1 = init_joint;                   
 
     %% Newton Raphson's loop
-%     theta_limitation = [-pi, pi;      %Angle constraints
-%          -pi/2, pi/2;
-%          -pi/2, pi/2;
-%          -pi, pi;
-%          0, 0;
-%          0, 0];
-%     theta_limitation = [-pi*110/180, pi;      %Angle constraints
-%          -pi/2, pi/2;
-%          -pi/2, pi/2;
-%          -pi, pi;
-%          0, 0;
-%          0, 0];
     theta_limitation = [-100, 160; %Angle constraints
                     -40-90, 70-90;
                     -170, 60;
@@ -39,7 +27,6 @@ function  [theta_result,Q_k_1] = interative_ik(init_joint,target_position,transf
     
     Vp_to_target = target_position-Q_k_1; % vector from guessed position to desired target position 
     p_to_target = norm(Vp_to_target); % Distance between target position and guess 
-    
     % interative begin
     while p_to_target > 0.0001
         

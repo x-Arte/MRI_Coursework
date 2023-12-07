@@ -63,12 +63,11 @@ disp('Task 4');
 load("Task4_theta_list.mat");
 pump_on = 2;
 pump_off = 5;
-
 myObj.go_to_zero(s);
 pause(2);
 %init
 for i = 1:6
-    theta = Task4_theta_list(:,i)';
+    theta = calculated_theta_list(:,i)';
     myObj.go_to_axis(s,theta(1),theta(2),theta(3),theta(4),theta(5),theta(6));
     pause(2);
     if i == pump_on
@@ -190,7 +189,7 @@ bonus_pump_off_leave_2 = bonus_pump_on_init_1;
 
 % bonus_pump_on_init_2(5:6,:) = [186, 70, 110;241.5, 91, 110];
 % bonus_pump_on_2(5:6,:) = [ 186, 70, 81;241.5, 91, 81];
-% bonus_pump_on_leave_2(5:6,:) = [186, 70, 110; 239, 91, 110];
+% bonus_pump_on_leave_2(5:6,:) = [186, 70, 110; 241.5, 91, 110];
 % bonus_pump_off_init_2(5:6,:) = [ 166, -106, 110;   203, -67 110];
 % bonus_pump_off_2(5:6,:) = [166, -106, 81;  203, -67, 81];
 % bonus_pump_off_leave_2(5:6,:) = [ 166, -106, 110;  203, -67, 110];
@@ -199,7 +198,7 @@ bonus_pump_on_init_2 = cat(1,[241.5, 91, 110;186, 70, 110],bonus_pump_on_init_2)
 bonus_pump_on_init_2(7:8,:) = [];
 bonus_pump_on_2 = cat(1,[ 241.5, 91, 81;186, 70, 81],bonus_pump_on_2);
 bonus_pump_on_2(7:8,:) = [];
-bonus_pump_on_leave_2 = cat(1,[ 239, 91, 110;186, 70, 110],bonus_pump_on_leave_2);
+bonus_pump_on_leave_2 = cat(1,[ 241.5, 91, 110;186, 70, 110],bonus_pump_on_leave_2);
 bonus_pump_on_leave_2(7:8,:) = [];
 bonus_pump_off_init_2 = cat(1,[   203, -67 110;166, -106, 110],bonus_pump_off_init_2);
 bonus_pump_off_init_2(7:8,:) = [];

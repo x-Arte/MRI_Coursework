@@ -36,9 +36,9 @@ pause(.2);
 %%% Calculating the joint motion path in joint space
 load("Task4_theta_list.mat");
 pos = [];
-pump_on_step = 2;
-pump_off_step = 5;
-
+pump_on_step = 3;
+pump_off_step = 6;
+Task4_theta_list = calculated_theta_list * pi/180;
 
 for i = 1:length(Task4_theta_list)
     this_pos = Task4_theta_list(:,i)';

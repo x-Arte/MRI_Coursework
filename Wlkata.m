@@ -10,25 +10,25 @@ pause(2);
 myObj.go_to_zero(s); %return back to initial position
 pause(2);
 
-% %% Task 2
-% % % Initial position
-% % joint_pos_init = rad2deg([-pi/2, pi/6, -pi/6, -pi/4, 0, 0]);
-% % % Intermediate Pose
-% % joint_pos_inter = rad2deg([0, pi/3, 0, 0, 0, 0]);
-% % % Final Pose
-% % joint_pos_final = rad2deg([pi/4, pi/6, -pi/4, 0, 0, 0]);
-% 
-% myObj.go_to_axis(s,-90,30,-30,-45,0,0); % go to axis positoin
-% pause(2);
-% 
-% myObj.go_to_axis(s,0,60,0,0,0,0); % go to axis positoin
-% pause(2);
-% 
-% myObj.go_to_axis(s,45,30,-45,0,0,0); % go to axis positoin
-% pause(2);
-% 
-% myObj.go_to_zero(s); %return back to initial position
-% pause(2);
+%% Task 2
+% % Initial position
+% joint_pos_init = rad2deg([-pi/2, pi/6, -pi/6, -pi/4, 0, 0]);
+% % Intermediate Pose
+% joint_pos_inter = rad2deg([0, pi/3, 0, 0, 0, 0]);
+% % Final Pose
+% joint_pos_final = rad2deg([pi/4, pi/6, -pi/4, 0, 0, 0]);
+
+myObj.go_to_axis(s,-90,30,-30,-45,0,0); % go to axis positoin
+pause(2);
+
+myObj.go_to_axis(s,0,60,0,0,0,0); % go to axis positoin
+pause(2);
+
+myObj.go_to_axis(s,45,30,-45,0,0,0); % go to axis positoin
+pause(2);
+
+myObj.go_to_zero(s); %return back to initial position
+pause(2);
 
 %% Task 3
 myObj.go_to_zero(s); %return back to initial position
@@ -60,42 +60,17 @@ end
 pause(5);
 %% Task 4
 disp('Task 4');
-myObj.home(s);
-pause(1);
-%init
-myObj.go_to_axis(s,90, 53, -10, 0, -46.7, 0);
-pause(1);
-myObj.go_to_axis(s,90, 58, -10, 0, -46.7, 0);
-pause(1);
-myObj.air_pump_on(s);
-pause(1);
-%inter
-myObj.go_to_axis(s,90, 50, -10, 0, -46.7, 0);
-pause(1);
-%final
-myObj.go_to_axis(s,90, 70, -35, 0, -51.7, 0);
-pause(1);
-myObj.go_to_axis(s,90, 70, -32, 0, -58.7, 0);
-pause(1);
-myObj.air_pump_off(s);
-pause(1);
-myObj.go_to_axis(s,90, 65, -32, 0, -58.7, 0);
-pause(1);
-myObj.home(s);
-pause(2);
-%% 
 load("Task4_theta_list.mat");
 pump_on = 2;
 pump_off = 5;
 
-myObj.home(s);
-pause(1);
+myObj.go_to_zero(s);
+pause(2);
 %init
-Task4_theta_list = Task4_theta_list*180/pi;
-for i = 1:length(Task4_theta_list)
+for i = 1:6
     theta = Task4_theta_list(:,i)';
     myObj.go_to_axis(s,theta(1),theta(2),theta(3),theta(4),theta(5),theta(6));
-    pause(1);
+    pause(2);
     if i == pump_on
         myObj.air_pump_on(s);
         pause(1);
@@ -113,56 +88,61 @@ myObj.home(s);
 disp('Task bonus');
 pause(10);
 %% 
-
 myObj.go_to_zero(s);
 pause(2);
 %% 
-myObj.go_to_cartesian_lin(s,237, -101.5, 110,0,0,0);
-
+myObj.go_to_axis(s,90,53.67,-9.59 ,0,-48.16,0);
 %% 
-
+myObj.go_to_cartesian_lin(s,241.5,91, 82,0,0,0);
+%%  
+myObj.air_pump_on(s);
+%%  
+myObj.air_pump_off(s);
+%% 
+myObj.go_to_zero(s);
+pause(6);
 interpolation_num = 6;
-bonus_pump_on_init_1 =   [237, -101.5, 110;
-                239, -70, 110;
-                200, -100, 110;
-                163, -71, 110;
-                162, -105, 110;
-                199, -67, 110];
+bonus_pump_on_init_1 =   [242, -101, 110;
+                 242, -69, 110;
+                204, -100, 110;
+                167, -72, 110;
+                166, -106, 110;
+                203, -67, 110];
 
-bonus_pump_on_1 = [237, -101.5, 82;
-                 238, -70, 82;
-                 200, -100, 82;
-                 163, -71, 82;
-                 162, -105, 82;
-                 199, -67, 82];
+bonus_pump_on_1 = [242, -101, 81;
+                  242, -69, 81;
+                204, -100, 81;
+                 167, -72, 81;
+                 166, -106, 81;
+                 203, -67, 81];
 
-bonus_pump_on_leave_1 = [237, -101.5, 110;
-                       238, -70, 110;
-                       200, -100, 110;
-                       163, -71, 110;
-                       162, -105, 110;
-                       199, -67, 110];
+bonus_pump_on_leave_1 = [242, -101, 110;
+                        242, -69, 110;
+                       204, -100, 110;
+                        167, -72, 110;
+                       166, -106, 110;
+                        203, -67, 110];
 
-bonus_pump_off_init_1 = [219, 71, 110;
-                       221, 103.5, 110;
-                       185, 105, 110;
-                       163, 90, 110;
-                       184, 66, 110;
-                       239, 96, 110];
+bonus_pump_off_init_1 = [221, 70, 110;
+                       220, 107, 110;
+                       186, 105,  110;
+                       166, 88, 110;
+                      186, 64, 110;
+                       241.5, 95, 110];
 
-bonus_pump_off_1 = [219, 71, 82;
-                  221, 103.5, 82;
-                  185, 105, 82;
-                  163, 90, 82;
-                  184, 66, 82;
-                  239, 96, 82];
+bonus_pump_off_1 = [221, 70, 81;
+                  220, 107, 81;
+                  186, 105, 81;
+                  166, 88, 81;
+                   186, 64, 81;
+                  241.5, 95, 81];
 
-bonus_pump_off_leave_1 = [219, 71, 110;
-                        221, 103.5, 110;
-                        185, 105, 110;
-                        163, 90, 110;
-                        184, 68, 110;
-                        239, 90, 110];
+bonus_pump_off_leave_1 = [221, 70, 110;
+                        220, 107, 110;
+                        186, 105, 110;
+                       166, 88,110;
+                         186, 70,110;
+                        241.5, 90,110];
 
 % bonus_control(s,bonus_pump_on_init_1,bonus_pump_on_1,bonus_pump_on_leave_1,bonus_pump_off_init_1,bonus_pump_off_1,bonus_pump_off_leave_1,1);
 
@@ -185,11 +165,11 @@ for i = 1:interpolation_num
     myObj.go_to_cartesian_lin(s,bonus_pump_off_1(i,1),bonus_pump_off_1(i,2),bonus_pump_off_1(i,3),0,0,0);
     pause(1);
     if i == 5
-        myObj.go_to_cartesian_lin(s,184, 68, 82,0,0,0);
+        myObj.go_to_cartesian_lin(s,186, 70, 81,0,0,0);
         pause(1);
     end
     if  i == 6
-        myObj.go_to_cartesian_lin(s,239, 90, 82,0,0,0);
+        myObj.go_to_cartesian_lin(s, 241.5, 90, 81,0,0,0);
         pause(1);
     end
     myObj.air_pump_off(s);
@@ -199,7 +179,7 @@ for i = 1:interpolation_num
     pause(1);
 end
 
-pause(5);
+pause(2);
 
 bonus_pump_on_init_2 = bonus_pump_off_leave_1;
 bonus_pump_on_2 = bonus_pump_off_1;
@@ -208,12 +188,26 @@ bonus_pump_off_init_2 = bonus_pump_on_leave_1;
 bonus_pump_off_2 = bonus_pump_on_1;
 bonus_pump_off_leave_2 = bonus_pump_on_init_1;
 
-bonus_pump_on_init_2(5:6,:) = [184, 68, 110;239, 90, 110];
-bonus_pump_on_2(5:6,:) = [186, 66, 82;239, 90, 82];
-bonus_pump_on_leave_2(5:6,:) = [186, 66, 110; 239, 90, 110];
-bonus_pump_off_init_2(5:6,:) = [ 162, -108, 110;  199, -61, 110];
-bonus_pump_off_2(5:6,:) = [162, -108, 82; 199, -61, 82];
-bonus_pump_off_leave_2(5:6,:) = [ 162, -108, 110;  199, -61, 110];
+% bonus_pump_on_init_2(5:6,:) = [186, 70, 110;241.5, 91, 110];
+% bonus_pump_on_2(5:6,:) = [ 186, 70, 81;241.5, 91, 81];
+% bonus_pump_on_leave_2(5:6,:) = [186, 70, 110; 239, 91, 110];
+% bonus_pump_off_init_2(5:6,:) = [ 166, -106, 110;   203, -67 110];
+% bonus_pump_off_2(5:6,:) = [166, -106, 81;  203, -67, 81];
+% bonus_pump_off_leave_2(5:6,:) = [ 166, -106, 110;  203, -67, 110];
+
+bonus_pump_on_init_2 = cat(1,[241.5, 91, 110;186, 70, 110],bonus_pump_on_init_2);
+bonus_pump_on_init_2(7:8,:) = [];
+bonus_pump_on_2 = cat(1,[ 241.5, 91, 81;186, 70, 81],bonus_pump_on_2);
+bonus_pump_on_2(7:8,:) = [];
+bonus_pump_on_leave_2 = cat(1,[ 239, 91, 110;186, 70, 110],bonus_pump_on_leave_2);
+bonus_pump_on_leave_2(7:8,:) = [];
+bonus_pump_off_init_2 = cat(1,[   203, -67 110;166, -106, 110],bonus_pump_off_init_2);
+bonus_pump_off_init_2(7:8,:) = [];
+bonus_pump_off_2 = cat(1,[  203, -67, 81;166, -106, 81;],bonus_pump_off_2);
+bonus_pump_off_2(7:8,:) = [];
+bonus_pump_off_leave_2 = cat(1,[203, -67, 110;166, -106, 110],bonus_pump_off_leave_2);
+bonus_pump_off_leave_2(7:8,:) = [];
+
 
 
 % bonus_control(s,bonus_pump_on_init_2,bonus_pump_on_2,bonus_pump_on_leave_2,bonus_pump_off_init_2,bonus_pump_off_2,bonus_pump_off_leave_2,0);
